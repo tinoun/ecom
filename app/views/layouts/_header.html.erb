@@ -1,0 +1,11 @@
+<div class="ui stackable secondary menu" style="padding: 10px; margin: 0;">
+	<%= link_to 'Home', root_path, class: "item" %>
+  <div class="right menu">
+    <% if user_signed_in? %>
+    	<%= link_to 'Mon compte', root_path, class: "item" %>
+    	<%= link_to 'Se déconnecter', destroy_user_session_path, :method => :delete, class: "ui red basic button circular" %>
+    <% else %>
+    	<%= link_to 'Se connecter', new_user_session_path, class: "ui violet basic button circular" %>
+    <% end %>
+  </div>
+</div>
