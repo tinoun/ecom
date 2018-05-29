@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  validates :name, presence: true, uniqueness: {case_insensitive: false}, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+  validates :name, presence: true, uniqueness: {case_sensitive: true}, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
 
   has_many :products
 
@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
     if login = conditions.delete(:login)
 
-      where(conditions.to_hash).where("lower(username) = :value OR lower(email) = :value", value: login.downcase).first
+      where(conditions.to_hash).where("lower(name) = :value OR lower(email) = :value", value: login.downcase).first
 
     else
 
